@@ -86,17 +86,6 @@
 /************************************************************************/
 /******/ ({
 
-/***/ "./src/js/parts/calc.js":
-/*!******************************!*\
-  !*** ./src/js/parts/calc.js ***!
-  \******************************/
-/*! no static exports found */
-/***/ (function(module, exports) {
-
-
-
-/***/ }),
-
 /***/ "./src/js/parts/modal.js":
 /*!*******************************!*\
   !*** ./src/js/parts/modal.js ***!
@@ -104,28 +93,26 @@
 /*! no static exports found */
 /***/ (function(module, exports) {
 
+function modal() {
+  let 
+      popupEngineer = document.querySelector('.popup_engineer'),
+      popupEngineerBtn = document.querySelector(".popup_engineer_btn"),
+      close = document.querySelector(".popup_close");
 
+  // Модальное окно на кнопку "Вызвать замерщика"
+  popupEngineerBtn.addEventListener('click', () => {
+    popupEngineer.style.display = 'block';
+    document.body.style.overflow = 'hidden';
+  });
+  // Закрыть модальное окно
+  close.addEventListener('click', () => {
+    popupEngineer.style.display = 'none';
+    document.body.style.overflow = '';
+  });
+  
+}
 
-/***/ }),
-
-/***/ "./src/js/parts/tabs.js":
-/*!******************************!*\
-  !*** ./src/js/parts/tabs.js ***!
-  \******************************/
-/*! no static exports found */
-/***/ (function(module, exports) {
-
-
-
-/***/ }),
-
-/***/ "./src/js/parts/timer.js":
-/*!*******************************!*\
-  !*** ./src/js/parts/timer.js ***!
-  \*******************************/
-/*! no static exports found */
-/***/ (function(module, exports) {
-
+module.exports = modal;
 
 
 /***/ }),
@@ -141,24 +128,18 @@
 __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _parts_modal__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./parts/modal */ "./src/js/parts/modal.js");
 /* harmony import */ var _parts_modal__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(_parts_modal__WEBPACK_IMPORTED_MODULE_0__);
-/* harmony import */ var _parts_calc__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./parts/calc */ "./src/js/parts/calc.js");
-/* harmony import */ var _parts_calc__WEBPACK_IMPORTED_MODULE_1___default = /*#__PURE__*/__webpack_require__.n(_parts_calc__WEBPACK_IMPORTED_MODULE_1__);
-/* harmony import */ var _parts_tabs__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./parts/tabs */ "./src/js/parts/tabs.js");
-/* harmony import */ var _parts_tabs__WEBPACK_IMPORTED_MODULE_2___default = /*#__PURE__*/__webpack_require__.n(_parts_tabs__WEBPACK_IMPORTED_MODULE_2__);
-/* harmony import */ var _parts_timer__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ./parts/timer */ "./src/js/parts/timer.js");
-/* harmony import */ var _parts_timer__WEBPACK_IMPORTED_MODULE_3___default = /*#__PURE__*/__webpack_require__.n(_parts_timer__WEBPACK_IMPORTED_MODULE_3__);
 
-
-
-
+// import {calc} from "./parts/calc";
+// import {tabs} from "./parts/tabs";
+// import {timer} from "./parts/timer";
 
 window.addEventListener('DOMContentLoaded', function () {
   'use strict';
-
-  Object(_parts_modal__WEBPACK_IMPORTED_MODULE_0__["modal"])();
-  Object(_parts_calc__WEBPACK_IMPORTED_MODULE_1__["calc"])();
-  Object(_parts_tabs__WEBPACK_IMPORTED_MODULE_2__["tabs"])();
-  Object(_parts_timer__WEBPACK_IMPORTED_MODULE_3__["timer"])();
+  
+  _parts_modal__WEBPACK_IMPORTED_MODULE_0___default()();
+  // calc();
+  // tabs();
+  // timer();
 });
 
 /***/ })
