@@ -1,0 +1,23 @@
+{
+  "name": "final-project-js",
+  "version": "1.0.0",
+  "description": "дипломная работа на курсе JS",
+  "main": "webpack.config.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/Sensuele/final-project-JS.git"
+  },
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/Sensuele/final-project-JS/issues"
+  },
+  "homepage": "https://github.com/Sensuele/final-project-JS#readme",
+  "devDependencies": {
+    "webpack": "^4.32.2",
+    "webpack-cli": "^3.3.2"
+  }
+}
