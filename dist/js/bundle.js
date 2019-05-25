@@ -178,6 +178,77 @@ module.exports = tabs;
 
 /***/ }),
 
+/***/ "./src/js/parts/timer.js":
+/*!*******************************!*\
+  !*** ./src/js/parts/timer.js ***!
+  \*******************************/
+/*! no static exports found */
+/***/ (function(module, exports) {
+
+let timer = () => {
+  let deadline = '2019-05-29 ';
+
+  let getTimeRemaining = (endtime) => {
+    let t = Date.parse(endtime) - Date.parse(new Date()),
+    seconds = Math.floor((t/1000) % 60),
+    minutes = Math.floor((t/1000/60) % 60),
+    hours = Math.floor((t/(1000*60*60) % 24)),
+    days = Math.floor((t / (1000 * 60 * 60 * 24)));
+
+    return {
+      'total' : t,
+      'days' : days,
+      'hours' : hours,
+      'minutes' : minutes,
+      'seconds' : seconds
+    };
+  };
+
+  let setClock = (id, endtime) => {
+    let timer = document.getElementById(id),
+        days = timer.querySelector("#days"),
+        hours = timer.querySelector('#hours'),
+        minutes = timer.querySelector('#minutes'),
+        seconds = timer.querySelector('#seconds'),
+        timeInterval = setInterval(updateClock, 1000);
+    
+    function updateClock() {
+      let t = getTimeRemaining(endtime);
+      days.textContent = t.days;
+      hours.textContent = t.hours;
+      minutes.textContent = t.minutes;
+      seconds.textContent = t.seconds;
+
+      // подставляем 0 перед значениями, которые состоят из одной цифры
+      if (days.textContent < 10){
+        days.textContent = '0' + t.days;
+      }
+      if (hours.textContent < 10){
+      hours.textContent = '0' + t.hours;
+      }
+      if (minutes.textContent < 10){
+        minutes.textContent = '0' + t.minutes;
+      }
+      if (seconds.textContent < 10){
+        seconds.textContent = '0' + t.seconds;
+      }  
+      // если дата уже прошла выводится: 00:00:00 
+      if (t.total <= 0) {
+        days.textContent = "00";
+        hours.textContent = "00";
+        minutes.textContent = "00";
+        seconds.textContent = "00";
+        clearInterval(timeInterval);
+      } 
+    }     
+  };
+  setClock('timer', deadline);
+};
+
+module.exports = timer;
+
+/***/ }),
+
 /***/ "./src/js/script.js":
 /*!**************************!*\
   !*** ./src/js/script.js ***!
@@ -189,10 +260,12 @@ module.exports = tabs;
 __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _parts_tabs__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./parts/tabs */ "./src/js/parts/tabs.js");
 /* harmony import */ var _parts_tabs__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(_parts_tabs__WEBPACK_IMPORTED_MODULE_0__);
+/* harmony import */ var _parts_timer__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./parts/timer */ "./src/js/parts/timer.js");
+/* harmony import */ var _parts_timer__WEBPACK_IMPORTED_MODULE_1___default = /*#__PURE__*/__webpack_require__.n(_parts_timer__WEBPACK_IMPORTED_MODULE_1__);
 // import modal from "./parts/modal";
 // import {calc} from "./parts/calc";
 
-// import {timer} from "./parts/timer";
+
 
 window.addEventListener('DOMContentLoaded', function () {
   'use strict';
@@ -200,7 +273,7 @@ window.addEventListener('DOMContentLoaded', function () {
   // modal();
   // calc();
   _parts_tabs__WEBPACK_IMPORTED_MODULE_0___default()();
-  // timer();
+  _parts_timer__WEBPACK_IMPORTED_MODULE_1___default()();
 });
 
 /***/ })
