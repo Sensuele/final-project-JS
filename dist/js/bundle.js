@@ -86,34 +86,59 @@
 /************************************************************************/
 /******/ ({
 
-/***/ "./src/js/parts/modal.js":
-/*!*******************************!*\
-  !*** ./src/js/parts/modal.js ***!
-  \*******************************/
+/***/ "./src/js/parts/tabs.js":
+/*!******************************!*\
+  !*** ./src/js/parts/tabs.js ***!
+  \******************************/
 /*! no static exports found */
 /***/ (function(module, exports) {
 
-function modal() {
-  let 
-      popupEngineer = document.querySelector('.popup_engineer'),
-      popupEngineerBtn = document.querySelector(".popup_engineer_btn"),
-      close = document.querySelector(".popup_close");
+function tabs() {
 
-  // Модальное окно на кнопку "Вызвать замерщика"
-  popupEngineerBtn.addEventListener('click', () => {
-    popupEngineer.style.display = 'block';
-    document.body.style.overflow = 'hidden';
+	let info = document.querySelector(".info"),
+      tabContent = document.querySelectorAll(".tabcontent_glazing"),
+      tab = document.querySelectorAll(".glazing_block");
+      
+
+      // табы для блока "ОСТЕКЛЕНИЕ БАЛКОНОВ И ЛОДЖИЙ"
+	function hideTabContent(a) {
+		for (let i = a; i < tabContent.length; i++) {
+			tabContent[i].classList.remove("show");
+			tabContent[i].classList.add("hide");
+		}
+		for (let i = a; i < tab.length; i++) {
+			tab[i].classList.remove('active');
+			tab[i].classList.add('no_active');
+		}
+	}
+	hideTabContent(1);
+
+	function showTabContent(b) {
+		if (tabContent[b].classList.contains("hide")) {
+			tabContent[b].classList.remove("hide");
+			tabContent[b].classList.add("show");
+		}
+		if (tab[b].classList.contains("no_active")) {
+			tab[b].classList.remove("no_active");
+			tab[b].classList.add("active");
+		}
+	}
+  info.addEventListener('click', (e) => {
+    let target = e.target;
+    if (target && target.classList.contains("glazing_block") || target.parentNode.classList.contains("glazing_block")) {
+      tab.forEach(function (e, i) {
+				if (target == e || target.parentNode == e) {
+					hideTabContent(0);
+					showTabContent(i);
+				}
+			});
+    }
   });
-  // Закрыть модальное окно
-  close.addEventListener('click', () => {
-    popupEngineer.style.display = 'none';
-    document.body.style.overflow = '';
-  });
-  
+
+	
 }
 
-module.exports = modal;
-
+module.exports = tabs;
 
 /***/ }),
 
@@ -126,19 +151,19 @@ module.exports = modal;
 
 "use strict";
 __webpack_require__.r(__webpack_exports__);
-/* harmony import */ var _parts_modal__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./parts/modal */ "./src/js/parts/modal.js");
-/* harmony import */ var _parts_modal__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(_parts_modal__WEBPACK_IMPORTED_MODULE_0__);
-
+/* harmony import */ var _parts_tabs__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./parts/tabs */ "./src/js/parts/tabs.js");
+/* harmony import */ var _parts_tabs__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(_parts_tabs__WEBPACK_IMPORTED_MODULE_0__);
+// import modal from "./parts/modal";
 // import {calc} from "./parts/calc";
-// import {tabs} from "./parts/tabs";
+
 // import {timer} from "./parts/timer";
 
 window.addEventListener('DOMContentLoaded', function () {
   'use strict';
   
-  _parts_modal__WEBPACK_IMPORTED_MODULE_0___default()();
+  // modal();
   // calc();
-  // tabs();
+  _parts_tabs__WEBPACK_IMPORTED_MODULE_0___default()();
   // timer();
 });
 
