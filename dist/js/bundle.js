@@ -86,6 +86,199 @@
 /************************************************************************/
 /******/ ({
 
+/***/ "./src/js/parts/form.js":
+/*!******************************!*\
+  !*** ./src/js/parts/form.js ***!
+  \******************************/
+/*! no static exports found */
+/***/ (function(module, exports) {
+
+let form = () => {
+  let message = {
+    loading: 'Загрузка...',
+    success: 'Спасибо! Скоро мы с вами свяжемся!',
+    failure: 'Что-то пошло не так...',
+  };
+
+  let 
+      input = document.getElementsByTagName('input'),
+      form = document.querySelectorAll('.form'),
+      statusMessage = document.createElement('div');
+      statusMessage.classList.add('status');
+
+  let sendForm = (elem) => {
+    elem.addEventListener('submit', (e) => {
+      e.preventDefault();
+      elem.appendChild(statusMessage);
+
+      let formData = new FormData(elem);
+
+      let postData = (data) => {
+
+        return new Promise((resolve, reject) => {
+          let request = new XMLHttpRequest();
+
+          request.open('POST', 'server.php');
+
+          request.setRequestHeader('Content-type', 'application/json; charset=utf-8');
+
+          request.onreadystatechange = () => {
+            if (request.readyState < 4) {
+              resolve();
+            } else if (request.readyState === 4) {
+              if (request.status == 200 && request.status < 3) {
+                resolve();
+              } else {
+                reject();
+              }
+            }
+          };
+          request.send(data);
+        });
+      }; // End postData
+      
+
+      let clearInput = () => {
+        for (let i = 0; i < input.length; i++) {
+          input[i].value = '';
+        }
+      };
+      postData(formData)
+      .then(() => (statusMessage.innerHTML = message.loading))
+      .then(() => (statusMessage.innerHTML = message.success))
+      .catch(() => (statusMessage.innerHTML = message.failure))
+      .then(clearInput);
+    });
+    
+  };    
+  form.forEach( (e) => {
+		sendForm(e);
+	});
+  
+};
+
+module.exports = form;
+
+/***/ }),
+
+/***/ "./src/js/parts/mask.js":
+/*!******************************!*\
+  !*** ./src/js/parts/mask.js ***!
+  \******************************/
+/*! no static exports found */
+/***/ (function(module, exports) {
+
+function mask() {
+  let setCursorPosition = (pos, elem) => {
+      elem.focus();
+  
+      if (elem.setSelectionRange) {
+          elem.setSelectionRange(pos, pos);
+      } else if (elem.createTextRange) {
+          let range = elem.createTextRange();
+  
+          range.collapse(true);
+          range.moveEnd('character', pos);
+          range.moveStart('character', pos);
+          range.select();
+      }
+  };
+  
+  function Mask(event) {
+      let matrix = '+7(___) ___ __ __',
+          i = 0,
+          def = matrix.replace(/\D/g, ''),
+          val = this.value.replace(/\D/g, '');
+  
+      if (def.length >= val.length) {
+          val = def;
+      }
+  
+      this.value = matrix.replace(/./g, function(a) {
+          return /[_\d]/.test(a) && i < val.length ? val.charAt(i++) : i >= val.length ? '' : a;
+      });
+  
+      if (event.type == 'blur') {
+          if (this.value.length == 2) {
+              this.value = '';
+          }
+      } else {
+          setCursorPosition(this.value.length, this);
+      }
+  }
+      
+  let input = document.querySelectorAll('[type="tel"]');
+  
+  for (let i = 0; i < input.length; i++) {
+      input[i].addEventListener('input', Mask, false);
+      input[i].addEventListener('focus', Mask, false);
+      input[i].addEventListener('blur', Mask, false);
+  }
+}
+
+module.exports = mask;
+
+/***/ }),
+
+/***/ "./src/js/parts/modal.js":
+/*!*******************************!*\
+  !*** ./src/js/parts/modal.js ***!
+  \*******************************/
+/*! no static exports found */
+/***/ (function(module, exports) {
+
+function modal() {
+  
+//   let popup = document.querySelector('.popup'),
+//       content = document.querySelector('.popup_content'),
+//       close = document.querySelector('.popup_close'),
+//       popupEngineer = document.querySelector('.popup_engineer'),
+//       popupEngineerBtn = document.querySelector(".popup_engineer_btn");
+
+//   // Модальное окно через 60 сек.
+//   let  showModal = () => {
+//       popup.style.display = 'block';
+//       document.body.style.overflow = 'hidden';
+
+//     popup.addEventListener('click', (e) => {
+//       let target = e.target;
+        
+//       if (!content.contains(target) || close.contains(target)) {
+//           popup.style.display = 'none';
+//           document.body.style.overflow = '';
+//       } else {
+//           popup.style.display = 'block';
+//           document.body.style.overflow = 'hidden';
+//       }
+//     });
+//   };
+//   setTimeout(showModal, 60000);
+
+//   //  Модальное окно на кнопку "Вызвать замерщика"
+//   popupEngineerBtn.addEventListener('click', () => {
+//     popupEngineer.style.display = 'block';
+//     document.body.style.overflow = 'hidden';
+//   });
+//   // Закрыть модальное окно
+//   popupEngineer.addEventListener('click', (e) => {
+//     let target = e.target;
+      
+        
+//       if (!content.contains(target) || close.contains(target)) {
+//         popupEngineer.style.display = 'none';
+//         document.body.style.overflow = '';
+//     } else {
+//       popupEngineer.style.display = 'block';
+//         document.body.style.overflow = 'hidden';
+//     }
+//   });
+
+}
+
+module.exports = modal;
+
+/***/ }),
+
 /***/ "./src/js/parts/tabs.js":
 /*!******************************!*\
   !*** ./src/js/parts/tabs.js ***!
@@ -258,22 +451,32 @@ module.exports = timer;
 
 "use strict";
 __webpack_require__.r(__webpack_exports__);
-/* harmony import */ var _parts_tabs__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./parts/tabs */ "./src/js/parts/tabs.js");
-/* harmony import */ var _parts_tabs__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(_parts_tabs__WEBPACK_IMPORTED_MODULE_0__);
-/* harmony import */ var _parts_timer__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./parts/timer */ "./src/js/parts/timer.js");
-/* harmony import */ var _parts_timer__WEBPACK_IMPORTED_MODULE_1___default = /*#__PURE__*/__webpack_require__.n(_parts_timer__WEBPACK_IMPORTED_MODULE_1__);
-// import modal from "./parts/modal";
+/* harmony import */ var _parts_modal__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./parts/modal */ "./src/js/parts/modal.js");
+/* harmony import */ var _parts_modal__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(_parts_modal__WEBPACK_IMPORTED_MODULE_0__);
+/* harmony import */ var _parts_tabs__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./parts/tabs */ "./src/js/parts/tabs.js");
+/* harmony import */ var _parts_tabs__WEBPACK_IMPORTED_MODULE_1___default = /*#__PURE__*/__webpack_require__.n(_parts_tabs__WEBPACK_IMPORTED_MODULE_1__);
+/* harmony import */ var _parts_timer__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./parts/timer */ "./src/js/parts/timer.js");
+/* harmony import */ var _parts_timer__WEBPACK_IMPORTED_MODULE_2___default = /*#__PURE__*/__webpack_require__.n(_parts_timer__WEBPACK_IMPORTED_MODULE_2__);
+/* harmony import */ var _parts_form__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ./parts/form */ "./src/js/parts/form.js");
+/* harmony import */ var _parts_form__WEBPACK_IMPORTED_MODULE_3___default = /*#__PURE__*/__webpack_require__.n(_parts_form__WEBPACK_IMPORTED_MODULE_3__);
+/* harmony import */ var _parts_mask__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! ./parts/mask */ "./src/js/parts/mask.js");
+/* harmony import */ var _parts_mask__WEBPACK_IMPORTED_MODULE_5___default = /*#__PURE__*/__webpack_require__.n(_parts_mask__WEBPACK_IMPORTED_MODULE_5__);
+
 // import {calc} from "./parts/calc";
+
+
 
 
 
 window.addEventListener('DOMContentLoaded', function () {
   'use strict';
   
-  // modal();
+  _parts_modal__WEBPACK_IMPORTED_MODULE_0___default()();
   // calc();
-  _parts_tabs__WEBPACK_IMPORTED_MODULE_0___default()();
-  _parts_timer__WEBPACK_IMPORTED_MODULE_1___default()();
+  _parts_tabs__WEBPACK_IMPORTED_MODULE_1___default()();
+  _parts_timer__WEBPACK_IMPORTED_MODULE_2___default()();
+  _parts_form__WEBPACK_IMPORTED_MODULE_3___default()();
+  _parts_mask__WEBPACK_IMPORTED_MODULE_5___default()();
 });
 
 /***/ })

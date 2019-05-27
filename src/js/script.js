@@ -1,13 +1,17 @@
-// import modal from "./parts/modal";
+import modal from "./parts/modal";
 // import {calc} from "./parts/calc";
 import tabs from "./parts/tabs";
 import timer from "./parts/timer";
+import form from "./parts/form";
+import mask from "./parts/mask";
 
 window.addEventListener('DOMContentLoaded', function () {
   'use strict';
   
-  // modal();
+  modal();
   // calc();
   tabs();
   timer();
+  form();
+  mask();
 });
