@@ -227,53 +227,65 @@ module.exports = mask;
 /*! no static exports found */
 /***/ (function(module, exports) {
 
-function modal() {
-  
-//   let popup = document.querySelector('.popup'),
-//       content = document.querySelector('.popup_content'),
-//       close = document.querySelector('.popup_close'),
-//       popupEngineer = document.querySelector('.popup_engineer'),
-//       popupEngineerBtn = document.querySelector(".popup_engineer_btn");
+let modal = () => {
 
-//   // Модальное окно через 60 сек.
-//   let  showModal = () => {
-//       popup.style.display = 'block';
-//       document.body.style.overflow = 'hidden';
+  let headerBtn = document.querySelector('.header_btn'),
+      popupEn = document.querySelector('.popup_engineer'),
+      popup = document.querySelector('.popup'),
+      close = document.getElementsByClassName('popup_close')[0],
+      closeEn = document.getElementsByClassName('popup_close')[1],
+      phoneLink = document.getElementsByClassName('phone_link');
 
-//     popup.addEventListener('click', (e) => {
-//       let target = e.target;
-        
-//       if (!content.contains(target) || close.contains(target)) {
-//           popup.style.display = 'none';
-//           document.body.style.overflow = '';
-//       } else {
-//           popup.style.display = 'block';
-//           document.body.style.overflow = 'hidden';
-//       }
-//     });
-//   };
-//   setTimeout(showModal, 60000);
 
-//   //  Модальное окно на кнопку "Вызвать замерщика"
-//   popupEngineerBtn.addEventListener('click', () => {
-//     popupEngineer.style.display = 'block';
-//     document.body.style.overflow = 'hidden';
-//   });
-//   // Закрыть модальное окно
-//   popupEngineer.addEventListener('click', (e) => {
-//     let target = e.target;
-      
-        
-//       if (!content.contains(target) || close.contains(target)) {
-//         popupEngineer.style.display = 'none';
-//         document.body.style.overflow = '';
-//     } else {
-//       popupEngineer.style.display = 'block';
-//         document.body.style.overflow = 'hidden';
-//     }
-//   });
+  //  Модальное окно через 60сек
 
-}
+  window.setTimeout(function () {
+    popup.style.display = 'block';
+    document.body.style.overflow = 'hidden';
+  }, 60000);
+
+  // модальное окно Заказать обратный звонок
+  let openModal = () => {
+    popup.style.display = 'block';
+    document.body.style.overflow = 'hidden';
+  };
+  for (let i = 0; i < phoneLink.length; i++) {
+    phoneLink[i].addEventListener('click', openModal);
+  }
+   // Закрыть модальное окно
+  let closeModal = () => {
+    popup.style.display = 'none';
+    document.body.style.overflow = '';
+  };
+  close.addEventListener('click', (closeModal));
+  popup.addEventListener('click', (e) => {
+    if (e.target.closest('.popup_dialog')) {
+    return;
+  } 
+  closeModal();
+  });    
+
+  // Модальное окно "Вызвать замерщика"
+
+  let openEnModal = () => {
+    popupEn.style.display = 'block';
+    document.body.style.overflow = 'hidden';
+  };
+  headerBtn.addEventListener('click', openEnModal);
+
+  // Закрыть модальное окно
+  let closeEnModal = () => {
+    popupEn.style.display = 'none';
+    document.body.style.overflow = '';
+  };
+  closeEn.addEventListener('click', closeEnModal);
+  popupEn.addEventListener('click', (e) => {
+    if (event.target.closest('.popup_dialog')) {
+        return;
+    }
+    closeEnModal();
+  });
+};
 
 module.exports = modal;
 
@@ -459,8 +471,8 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _parts_timer__WEBPACK_IMPORTED_MODULE_2___default = /*#__PURE__*/__webpack_require__.n(_parts_timer__WEBPACK_IMPORTED_MODULE_2__);
 /* harmony import */ var _parts_form__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ./parts/form */ "./src/js/parts/form.js");
 /* harmony import */ var _parts_form__WEBPACK_IMPORTED_MODULE_3___default = /*#__PURE__*/__webpack_require__.n(_parts_form__WEBPACK_IMPORTED_MODULE_3__);
-/* harmony import */ var _parts_mask__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! ./parts/mask */ "./src/js/parts/mask.js");
-/* harmony import */ var _parts_mask__WEBPACK_IMPORTED_MODULE_5___default = /*#__PURE__*/__webpack_require__.n(_parts_mask__WEBPACK_IMPORTED_MODULE_5__);
+/* harmony import */ var _parts_mask__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ./parts/mask */ "./src/js/parts/mask.js");
+/* harmony import */ var _parts_mask__WEBPACK_IMPORTED_MODULE_4___default = /*#__PURE__*/__webpack_require__.n(_parts_mask__WEBPACK_IMPORTED_MODULE_4__);
 
 // import {calc} from "./parts/calc";
 
@@ -476,7 +488,7 @@ window.addEventListener('DOMContentLoaded', function () {
   _parts_tabs__WEBPACK_IMPORTED_MODULE_1___default()();
   _parts_timer__WEBPACK_IMPORTED_MODULE_2___default()();
   _parts_form__WEBPACK_IMPORTED_MODULE_3___default()();
-  _parts_mask__WEBPACK_IMPORTED_MODULE_5___default()();
+  _parts_mask__WEBPACK_IMPORTED_MODULE_4___default()();
 });
 
 /***/ })
