@@ -109,13 +109,13 @@ function calc() {
       calcClose = document.querySelector('.popup_calc_close'),
       endClose = document.querySelector('.popup_calc_end_close'),
       profileClose = document.querySelector('.popup_calc_profile_close'),
-      windowSettings = {};
+      data = {};
 
 
 	popupCalcBtn.forEach(e => {
 		e.addEventListener('click', () => {
 			popupCalc.style.display = "block";
-			windowSettings.type = balconIcons[0].getAttribute('class');
+			data.type = balconIcons[0].getAttribute('class');
 			document.body.style.overflow = "hidden";
 		});
 	});
@@ -133,7 +133,7 @@ function calc() {
 				const typeSelectedWindow = el.getAttribute('id');
 				if (typeSelectedWindow == typeWindowCalc) {
 					el.style.display = 'inline-block';
-					windowSettings.type = typeWindowCalc;					
+					data.type = typeWindowCalc;					
 				} else {
 					el.style.display = 'none';
 				}
@@ -155,11 +155,11 @@ function calc() {
 		if (popupCalcInput[0].value && popupCalcInput[1].value) {
 			popupCalc.style.display = 'none';
 			popupCalcProfile.style.display = 'block';
-			windowSettings.width = popupCalcInput[0].value;
+			data.width = popupCalcInput[0].value;
 			popupCalcInput[0].value = '';
-			windowSettings.heigh = popupCalcInput[1].value;
+			data.heigh = popupCalcInput[1].value;
 			popupCalcInput[1].value = '';
-			windowSettings.glazingType = popupCalcSelect.options[0].value;
+			data.glazingType = popupCalcSelect.options[0].value;
 			
 		} else {
 			popupCalcInput.forEach(input => {
@@ -172,7 +172,7 @@ function calc() {
 
 
 	popupCalcSelect.addEventListener('change', function () {
-		windowSettings.glazingType = this.options[this.selectedIndex].value;
+		data.glazingType = this.options[this.selectedIndex].value;
 	});
 
 
@@ -182,14 +182,14 @@ function calc() {
 				[].slice.call(document.querySelectorAll('.checkbox')).forEach(c => c.checked = false);
 				event.target.checked = true;
 			}
-			windowSettings.glazingProfile = label.querySelector('.checkbox-custom').getAttribute('id');
+			data.glazingProfile = label.querySelector('.checkbox-custom').getAttribute('id');
 		});
 	});
 
 
 	popupCalcProfileButton.addEventListener('click', () => {
 		document.body.style.overflow = "";
-		if (windowSettings.glazingProfile) {
+		if (data.glazingProfile) {
 			popupCalcProfile.style.display = 'none';
 			popupCalcEnd.style.display = 'block';
 			document.querySelectorAll('.checkbox').forEach(c => c.checked = false);
@@ -210,7 +210,62 @@ function calc() {
     popupCalcProfile.style.display = 'none';
     document.body.style.overflow = '';
   });
-	return windowSettings;
+	
+
+	// отправка данных 
+
+  let 
+      input = document.getElementsByTagName('input'),
+      form = document.querySelectorAll('.popup_calc_end form'),
+      statusMessage = document.createElement('div');
+      statusMessage.classList.add('status');
+      
+
+  let sendForm = (data) => {
+    data.addEventListener('submit', (e) => {
+      e.preventDefault();
+      data.appendChild(statusMessage);
+
+      let formData = new FormData(data);
+
+      let postData = (data) => {
+
+        return new Promise((resolve, reject) => {
+          let request = new XMLHttpRequest();
+
+          request.open('POST', 'server.php');
+
+          request.setRequestHeader('Content-type', 'application/json; charset=utf-8');
+
+          request.onreadystatechange = () => {
+            if (request.readyState < 4) {
+              resolve();
+            } else if (request.readyState === 4) {
+              if (request.status == 200 && request.status < 3) {
+                resolve();
+              } else {
+                reject();
+              }
+            }
+          };
+          request.send(data);
+        });
+      }; // End postData
+      
+
+      let clearInput = () => {
+        for (let i = 0; i < input.length; i++) {
+          input[i].value = '';
+        }
+      };
+      
+    });
+    
+  };    
+  form.forEach( (e) => {
+		sendForm(e);
+	});
+
 }
 
 module.exports = calc;
@@ -236,6 +291,7 @@ let form = () => {
       form = document.querySelectorAll('.form'),
       statusMessage = document.createElement('div');
       statusMessage.classList.add('status');
+      
 
   let sendForm = (elem) => {
     elem.addEventListener('submit', (e) => {

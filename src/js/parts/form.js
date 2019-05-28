@@ -10,6 +10,7 @@ let form = () => {
       form = document.querySelectorAll('.form'),
       statusMessage = document.createElement('div');
       statusMessage.classList.add('status');
+      
 
   let sendForm = (elem) => {
     elem.addEventListener('submit', (e) => {
