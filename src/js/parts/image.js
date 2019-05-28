@@ -1,7 +1,6 @@
-
-    function image() {
-
+function image() {
+  
     
-  }
+}
   
   module.exports = image;

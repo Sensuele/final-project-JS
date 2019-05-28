@@ -16,9 +16,10 @@ let modal = () => {
   }, 60000);
 
   // модальное окно Заказать обратный звонок
-  let openModal = () => {
+  let openModal = (e) => {
     popup.style.display = 'block';
     document.body.style.overflow = 'hidden';
+    e.preventDefault();
   };
   for (let i = 0; i < phoneLink.length; i++) {
     phoneLink[i].addEventListener('click', openModal);
