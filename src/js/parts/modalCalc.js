@@ -127,12 +127,13 @@ function modalCalc() {
         }
 
     });
+    type1[0].classList.add('show');
 
     let hideTabf = (f) => {
         for (let i = f; i < type1.length; i++) {
             type1[i].classList.remove('show');
             type1[i].classList.add('hide');
-            type1[i].classList.add('text-center');
+            // type1[i].classList.add('text-center');
 
         }
     };
@@ -143,13 +144,13 @@ function modalCalc() {
         if (type1[g].classList.contains('hide')) {
             type1[g].classList.remove('hide');
             type1[g].classList.add('show');
-            type1[g].classList.add('text-center');
+            // type1[g].classList.add('text-center');
         }
     };
     let balconIconss = document.querySelectorAll('.typeE');
     let hideTabc = (c) => {
         for (let i = c; i < type.length; i++) {
-            balconIconss[i].classList.remove('.do_image_more');
+            balconIconss[i].classList.remove('do_image_more');
             balconIconss[i].classList.add('doimage_more');
 
         }

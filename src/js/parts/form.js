@@ -1,3 +1,7 @@
+import modalCalc, {
+  data_calc
+} from './modalCalc';
+
 let form = () => {
   let message = {
     loading: 'Загрузка...',

@@ -20,11 +20,6 @@
   <body>
   
 	  <script src="js/bundle.js"></script>
-    <!-- <script src="js/script.js"></script>
-    <script src="js/tabs.js"></script>
-    <script src="js/calc.js"></script>
-    <script src="js/timer.js"></script> -->
-    <!-- <script src="src/img.js"></script>  -->
     <header class="header">
       <div class="container">
         <div class="row">
@@ -844,85 +839,85 @@
     </div>
 
     <!-- Calculator -->
-   <div class="popup_calc">
-        <div class="popup_dialog">
-            <div class="popup_calc_content text-center">
-                <button type="button" class="popup_calc_close"><strong>&times;</strong></button>
-                 <h2>Калькулятор</h2>
-                <h3>Выберите форму балкона <br>и укажите размеры</h3>
-               <div class="balcon_icons">
-                 <a href="#" class="type1">
-                   <img src="img/modal_calc/balkon/ba_01.png" alt="Тип1" class="type1_img do_image_more"></a>
-                 <a href="#" class="type2">
-                   <img src="img/modal_calc/balkon/ba_02.png" alt="Тип2" class="type2_img"></a>
-                 <a href="#" class="type3">
-                   <img src="img/modal_calc/balkon/ba_03.png" alt="Тип3" class="type3_img"></a>
-                 <a href="#" class="type4"> 
-                   <img src="img/modal_calc/balkon/ba_04.png" alt="Тип4" class="type4_img"></a>
-               </div>
-                <div class="big_img text-center">
-                  <img src="img/modal_calc/balkon/type1.png" alt="" id="type1">
-                  <img src="img/modal_calc/balkon/type2.png" alt="" id="type2">
-                  <img src="img/modal_calc/balkon/type3.png" alt="" id="type3">
-                  <img src="img/modal_calc/balkon/type4.png" alt="" id="type4">
-                </div>
-                <input class="form-control" id="width" type="text" placeholder="Ширина" required>
-                <label for="width">мм</label>
-                <div class="multiplication"><strong>&times;</strong></div>
-                <input class="form-control" id="height" type="text" placeholder="Высота" required>
-                <label for="height">мм</label>
-                <button class="button popup_calc_button">Далее</button>
-            </div>
-        </div>
-    </div> 
+    <div class="popup_calc">
+      <div class="popup_dialog">
+          <div class="popup_calc_content text-center">
+              <button type="button" class="popup_calc_close"><strong>&times;</strong></button>
+               <h2>Калькулятор</h2>
+              <h3>Выберите форму балкона <br>и укажите размеры</h3>
+             <div class="balcon_icons">
+               <a href="#popup_calc type_window" >
+                 <img  src="img/modal_calc/balkon/ba_01.png" alt="Тип1" id="type1" class="type  do_image_more typeE"></a>
+               <a href="#popup_calc type_window" >
+                 <img src="img/modal_calc/balkon/ba_02.png" alt="Тип2" id="type1" class="type  typeE"></a>
+               <a href="#popup_calc type_window" >
+                 <img src="img/modal_calc/balkon/ba_03.png" alt="Тип3" id="type1" class="type  typeE"></a>
+               <a href="#popup_calc type_window" > 
+                 <img src="img/modal_calc/balkon/ba_04.png" alt="Тип4" id="type1" class="type   typeE"></a>
+             </div>
+              <div class="big_img text-center">
+                <img src="img/modal_calc/balkon/type1.png" alt="" class="typeElem ">
+                <img src="img/modal_calc/balkon/type2.png" alt="" class="typeElem ">
+                <img src="img/modal_calc/balkon/type3.png" alt="" class="typeElem ">
+                <img src="img/modal_calc/balkon/type4.png" alt="" class="typeElem ">
+              </div>
+              <input class="form-control" id="width" type="number" placeholder="Ширина" required>
+              <label for="width">мм</label>
+              <div class="multiplication"><strong>&times;</strong></div>
+              <input class="form-control" id="height" type="number" placeholder="Высота" required>
+              <label for="height">мм</label>
+              <button class="button popup_calc_button">Далее</button>
+          </div>
+      </div>
+  </div> 
 
-   <div class="popup_calc_profile">
-        <div class="popup_dialog">
-            <div class="popup_calc_profile_content text-center">
-                <button type="button" class="popup_calc_profile_close"><strong>&times;</strong></button>
-                 <h2>Калькулятор</h2>
-                 <h3>Выберите тип остекления <br>и его профиль</h3>
-                 <select class="form-control" name="view" id="view_type">
-                   <option value="tree">Деревянное остекление</option>
-                   <option value="aluminum">Алюминиевое остекление</option>
-                   <option value="plastic">Остекление пластиковыми рамами</option>
-                   <option value="french">Панорамное остекление</option>
-                   <option value="overhang">Остекление с выносом</option>
-                 </select>
-                 <img src="img/modal_calc/icon_cold.png" alt="">
-                 <label>
-                     <input class="checkbox" type="checkbox" name="checkbox-test">
-                     <span class="checkbox-custom" id="cold"></span>
-                     <span class="label">Холодное</span>
-                 </label>
-                 <img src="img/modal_calc/icon_warm.png" alt="">
-                 <label>
-                     <input class="checkbox" type="checkbox" name="checkbox-test">
-                     <span class="checkbox-custom" id="warm"></span>
-                     <span class="label">Теплое</span>
-                 </label>
+ <div class="popup_calc_profile">
+      <div class="popup_dialog">
+          <div class="popup_calc_profile_content text-center">
+              <button type="button" class="popup_calc_profile_close"><strong class="popup_calc_profile_closes">&times;</strong></button>
+               <h2>Калькулятор</h2>
+               <h3>Выберите тип остекления <br>и его профиль</h3>
+               <select class="form-control" name="view" id="view_type">
+                 <option value="tree">Деревянное остекление</option>
+                 <option value="aluminum">Алюминиевое остекление</option>
+                 <option value="plastic">Остекление пластиковыми рамами</option>
+                 <option value="french">Панорамное остекление</option>
+                 <option value="overhang">Остекление с выносом</option>
+               </select>
+               <img src="img/modal_calc/icon_cold.png" alt="">
+               <label>
+                   <input class="checkbox"  type="radio" temp="Холодное" name="checkbox-test">
+                   <span class="checkbox-custom" id="cold"></span>
+                   <span class="label">Холодное</span>
+               </label>
+               <img src="img/modal_calc/icon_warm.png" alt="">
+               <label>
+                   <input class="checkbox" type="radio" temp="Теплое" name="checkbox-test">
+                   <span class="checkbox-custom" id="warm"></span>
+                   <span class="label">Теплое</span>
+               </label>
 
-                 <button class="button popup_calc_profile_button">Далее</button>
-            </div>
-        </div>
-    </div> 
+               <button class="button popup_calc_profile_button">Далее</button>
+          </div>
+      </div>
+  </div> 
 
-    <div class="popup_calc_end">
-        <div class="popup_dialog">
-            <div class="popup_content text-center">
-                <button type="button" class="popup_calc_end_close"><strong>&times;</strong></button>
-                <div class="popup_form">
-                    <form class="form" action="#">
-                      <h2>Спасибо за обращение! <br>Оставьте свои данные</h2>
-                        <input class="form-control form_input" name="user_name" required type="text" placeholder="Введите ваше имя">
-                        <input class="form-control form_input" name="user_phone" required type="tel" placeholder="Введите телефон">
-                        <button class="text-uppercase btn-block button" name="submit" type="submit">Рассчитать стоимость</button>
-                        <p class="form_notice">Перезвоним в течение 10 минут</p>
-                    </form>
-                </div>
-            </div>
-        </div>
-    </div>
+  <div class="popup_calc_end">
+      <div class="popup_dialog">
+          <div class="popup_content text-center">
+              <button type="button" class="popup_calc_end_close"><strong class="popup_calc_end_close cls">&times;</strong></button>
+              <div class="popup_form">
+                  <form class="form" action="#">
+                    <h2>Спасибо за обращение! <br>Оставьте свои данные</h2>
+                      <input class="form-control form_input" name="user_name" required type="text" placeholder="Введите ваше имя">
+                      <input class="form-control form_input" name="user_phone" required type="tel" placeholder="Введите телефон">
+                      <button class="text-uppercase btn-block button" name="submit" type="submit">Рассчитать стоимость</button>
+                      <p class="form_notice">Перезвоним в течение 10 минут</p>
+                  </form>
+              </div>
+          </div>
+      </div>
+  </div>
 
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>
     <!-- Add slick.js -->
