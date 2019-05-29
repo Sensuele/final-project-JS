@@ -118,7 +118,11 @@ function calc() {
 	
 
 	// отправка данных 
-
+	let message = {
+    loading: 'Загрузка...',
+    success: 'Спасибо! Скоро мы с вами свяжемся!',
+    failure: 'Что-то пошло не так...',
+  };
   let 
       input = document.getElementsByTagName('input'),
       form = document.querySelectorAll('.popup_calc_end form'),
@@ -163,7 +167,11 @@ function calc() {
           input[i].value = '';
         }
       };
-      
+			postData(formData)
+      .then(() => (statusMessage.innerHTML = message.loading))
+      .then(() => (statusMessage.innerHTML = message.success))
+      .catch(() => (statusMessage.innerHTML = message.failure))
+      .then(clearInput);
     });
     
   };    

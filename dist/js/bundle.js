@@ -213,7 +213,11 @@ function calc() {
 	
 
 	// отправка данных 
-
+	let message = {
+    loading: 'Загрузка...',
+    success: 'Спасибо! Скоро мы с вами свяжемся!',
+    failure: 'Что-то пошло не так...',
+  };
   let 
       input = document.getElementsByTagName('input'),
       form = document.querySelectorAll('.popup_calc_end form'),
@@ -258,7 +262,11 @@ function calc() {
           input[i].value = '';
         }
       };
-      
+			postData(formData)
+      .then(() => (statusMessage.innerHTML = message.loading))
+      .then(() => (statusMessage.innerHTML = message.success))
+      .catch(() => (statusMessage.innerHTML = message.failure))
+      .then(clearInput);
     });
     
   };    
@@ -345,6 +353,53 @@ let form = () => {
 };
 
 module.exports = form;
+
+/***/ }),
+
+/***/ "./src/js/parts/image.js":
+/*!*******************************!*\
+  !*** ./src/js/parts/image.js ***!
+  \*******************************/
+/*! no static exports found */
+/***/ (function(module, exports) {
+
+function image() {
+  let   divImage = document.createElement('div'),
+        workSection = document.querySelector('.works'),
+        bigImgLink = document.querySelectorAll('.big_img_link'),
+        bigImage = document.createElement('Img'),
+        workImage = document.querySelectorAll('.work_image');
+
+    divImage.classList.add('popup');
+    workSection.appendChild(divImage);
+    divImage.style.justifyContent = 'center';
+    divImage.style.display = 'none';
+    divImage.style.alignItems = 'center';
+    divImage.appendChild(bigImage);
+
+    workImage.forEach((item, i) => {
+        item.addEventListener('click', () => {
+            bigImgLink.forEach((item, a) => {
+                if (i == a) {
+                    bigImage.setAttribute('src', item.href);
+                }
+            });
+        });
+    });
+
+    workSection.addEventListener('click', function(e) {
+        e.preventDefault();
+        let target = e.target;
+        if (target && target.classList.contains('work_image')) {
+            divImage.style.display = 'flex';
+        }
+        if (target && target.matches('div.popup')) {
+            divImage.style.display = 'none';
+        }
+    });
+}
+  
+  module.exports = image;
 
 /***/ }),
 
@@ -663,6 +718,8 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _parts_form__WEBPACK_IMPORTED_MODULE_4___default = /*#__PURE__*/__webpack_require__.n(_parts_form__WEBPACK_IMPORTED_MODULE_4__);
 /* harmony import */ var _parts_mask__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! ./parts/mask */ "./src/js/parts/mask.js");
 /* harmony import */ var _parts_mask__WEBPACK_IMPORTED_MODULE_5___default = /*#__PURE__*/__webpack_require__.n(_parts_mask__WEBPACK_IMPORTED_MODULE_5__);
+/* harmony import */ var _parts_image__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! ./parts/image */ "./src/js/parts/image.js");
+/* harmony import */ var _parts_image__WEBPACK_IMPORTED_MODULE_6___default = /*#__PURE__*/__webpack_require__.n(_parts_image__WEBPACK_IMPORTED_MODULE_6__);
 
 
 
@@ -680,7 +737,7 @@ window.addEventListener('DOMContentLoaded', function () {
   _parts_timer__WEBPACK_IMPORTED_MODULE_3___default()();
   _parts_form__WEBPACK_IMPORTED_MODULE_4___default()();
   _parts_mask__WEBPACK_IMPORTED_MODULE_5___default()();
-  _parts_mask__WEBPACK_IMPORTED_MODULE_5___default()();
+  _parts_image__WEBPACK_IMPORTED_MODULE_6___default()();
 });
 
 /***/ })
