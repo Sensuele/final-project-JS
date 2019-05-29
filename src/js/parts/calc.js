@@ -117,67 +117,67 @@ function calc() {
   });
 	
 
-	// отправка данных 
-	let message = {
-    loading: 'Загрузка...',
-    success: 'Спасибо! Скоро мы с вами свяжемся!',
-    failure: 'Что-то пошло не так...',
-  };
-  let 
-      input = document.getElementsByTagName('input'),
-      form = document.querySelectorAll('.popup_calc_end form'),
-      statusMessage = document.createElement('div');
-      statusMessage.classList.add('status');
+	// // отправка данных 
+	// let message = {
+  //   loading: 'Загрузка...',
+  //   success: 'Спасибо! Скоро мы с вами свяжемся!',
+  //   failure: 'Что-то пошло не так...',
+  // };
+  // let 
+  //     input = document.getElementsByTagName('input'),
+  //     form = document.querySelectorAll('.popup_calc_end form'),
+  //     statusMessage = document.createElement('div');
+  //     statusMessage.classList.add('status');
       
 
-  let sendForm = (data) => {
-    data.addEventListener('submit', (e) => {
-      e.preventDefault();
-      data.appendChild(statusMessage);
+  // let sendForm = (data) => {
+  //   data.addEventListener('submit', (e) => {
+  //     e.preventDefault();
+  //     data.appendChild(statusMessage);
 
-      let formData = new FormData(data);
+  //     let formData = new FormData(data);
 
-      let postData = (data) => {
+  //     let postData = (data) => {
 
-        return new Promise((resolve, reject) => {
-          let request = new XMLHttpRequest();
+  //       return new Promise((resolve, reject) => {
+  //         let request = new XMLHttpRequest();
 
-          request.open('POST', 'server.php');
+  //         request.open('POST', 'server.php');
 
-          request.setRequestHeader('Content-type', 'application/json; charset=utf-8');
+  //         request.setRequestHeader('Content-type', 'application/json; charset=utf-8');
 
-          request.onreadystatechange = () => {
-            if (request.readyState < 4) {
-              resolve();
-            } else if (request.readyState === 4) {
-              if (request.status == 200 && request.status < 3) {
-                resolve();
-              } else {
-                reject();
-              }
-            }
-          };
-          request.send(data);
-        });
-      }; // End postData
+  //         request.onreadystatechange = () => {
+  //           if (request.readyState < 4) {
+  //             resolve();
+  //           } else if (request.readyState === 4) {
+  //             if (request.status == 200 && request.status < 3) {
+  //               resolve();
+  //             } else {
+  //               reject();
+  //             }
+  //           }
+  //         };
+  //         request.send(data);
+  //       });
+  //     }; // End postData
       
 
-      let clearInput = () => {
-        for (let i = 0; i < input.length; i++) {
-          input[i].value = '';
-        }
-      };
-			postData(formData)
-      .then(() => (statusMessage.innerHTML = message.loading))
-      .then(() => (statusMessage.innerHTML = message.success))
-      .catch(() => (statusMessage.innerHTML = message.failure))
-      .then(clearInput);
-    });
+  //     let clearInput = () => {
+  //       for (let i = 0; i < input.length; i++) {
+  //         input[i].value = '';
+  //       }
+  //     };
+	// 		postData(formData)
+  //     .then(() => (statusMessage.innerHTML = message.loading))
+  //     .then(() => (statusMessage.innerHTML = message.success))
+  //     .catch(() => (statusMessage.innerHTML = message.failure))
+  //     .then(clearInput);
+  //   });
     
-  };    
-  form.forEach( (e) => {
-		sendForm(e);
-	});
+  // };    
+  // form.forEach( (e) => {
+	// 	sendForm(e);
+	// });
 
 }
 
