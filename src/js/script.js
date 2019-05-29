@@ -1,5 +1,5 @@
 import modal from "./parts/modal";
-import calc from "./parts/calc";
+import modalCalc from "./parts/modalcalc";
 import tabs from "./parts/tabs";
 import timer from "./parts/timer";
 import form from "./parts/form";
@@ -10,7 +10,7 @@ window.addEventListener('DOMContentLoaded', function () {
   'use strict';
   
   modal();
-  calc();
+  modalCalc();
   tabs();
   timer();
   form();

@@ -86,200 +86,6 @@
 /************************************************************************/
 /******/ ({
 
-/***/ "./src/js/parts/calc.js":
-/*!******************************!*\
-  !*** ./src/js/parts/calc.js ***!
-  \******************************/
-/*! no static exports found */
-/***/ (function(module, exports) {
-
-function calc() {
-  
-  let popupCalcBtn = document.querySelectorAll('.popup_calc_btn'), 
-      popupCalc = document.querySelector('.popup_calc'),
-      balconIcons = document.querySelectorAll('.balcon_icons a'), 
-      bigImg = document.querySelectorAll('.big_img img'), 
-      popupCalcButton = document.querySelector('.popup_calc_button'), 
-      popupCalcProfile = document.querySelector('.popup_calc_profile'), 
-      popupCalcProfileButton = document.querySelector('.popup_calc_profile_button'), 
-      popupCalcEnd = document.querySelector('.popup_calc_end'), 
-      popupCalcInput = popupCalc.querySelectorAll('input'),
-      popupCalcSelect = document.querySelector('select'),
-      popupCalcLabel = popupCalcProfile.querySelectorAll('label'),
-      calcClose = document.querySelector('.popup_calc_close'),
-      endClose = document.querySelector('.popup_calc_end_close'),
-      profileClose = document.querySelector('.popup_calc_profile_close'),
-      data = {};
-
-
-	popupCalcBtn.forEach(e => {
-		e.addEventListener('click', () => {
-			popupCalc.style.display = "block";
-			data.type = balconIcons[0].getAttribute('class');
-			document.body.style.overflow = "hidden";
-		});
-	});
-
-
-	balconIcons.forEach(element => {		
-		element.addEventListener('click', (event) => {
-      balconIcons.forEach( img => {
-				img.querySelector('img').classList.remove('do_image_more');
-			});
-			event.preventDefault();
-			document.body.style.overflow = "hidden";
-			let typeWindowCalc = event.target.parentNode.getAttribute('class');
-			bigImg.forEach(el => {
-				let typeSelectedWindow = el.getAttribute('id');
-				if (typeSelectedWindow == typeWindowCalc) {
-					el.style.display = 'inline-block';
-					data.type = typeWindowCalc;					
-				} else {
-					el.style.display = 'none';
-				}
-			});
-			element.querySelector('img').classList.add('do_image_more');
-		});
-	});
-
-
-	popupCalcInput.forEach(input => {
-		input.addEventListener('input', function () {
-			this.value = this.value.replace(/[^0-9]+/g, '');
-		});
-	});
-
-
-	popupCalcButton.addEventListener('click', () => {
-		document.body.style.overflow = "hidden";
-		if (popupCalcInput[0].value && popupCalcInput[1].value) {
-			popupCalc.style.display = 'none';
-			popupCalcProfile.style.display = 'block';
-			data.width = popupCalcInput[0].value;
-			popupCalcInput[0].value = '';
-			data.heigh = popupCalcInput[1].value;
-			popupCalcInput[1].value = '';
-			data.glazingType = popupCalcSelect.options[0].value;
-			
-		} else {
-			popupCalcInput.forEach(input => {
-				if (!input.value) {
-					input.focus();
-				}
-			});
-		}
-	});
-
-
-	popupCalcSelect.addEventListener('change', function () {
-		data.glazingType = this.options[this.selectedIndex].value;
-	});
-
-
-	popupCalcLabel.forEach(label => {
-		label.addEventListener('change', event => {
-			if (event.target.classList.contains('checkbox')) {
-				[].slice.call(document.querySelectorAll('.checkbox')).forEach(c => c.checked = false);
-				event.target.checked = true;
-			}
-			data.glazingProfile = label.querySelector('.checkbox-custom').getAttribute('id');
-		});
-	});
-
-
-	popupCalcProfileButton.addEventListener('click', () => {
-		document.body.style.overflow = "";
-		if (data.glazingProfile) {
-			popupCalcProfile.style.display = 'none';
-			popupCalcEnd.style.display = 'block';
-			document.querySelectorAll('.checkbox').forEach(c => c.checked = false);
-
-		}
-  });
-  calcClose.addEventListener('click', function () {
-    popupCalc.style.display = 'none';
-    document.body.style.overflow = '';
-  });  
-
-  endClose.addEventListener('click', function () {
-      popupCalcEnd.style.display = 'none';
-      document.body.style.overflow = '';
-  });
-
-  profileClose.addEventListener('click', function () {
-    popupCalcProfile.style.display = 'none';
-    document.body.style.overflow = '';
-  });
-	
-
-	// // отправка данных 
-	// let message = {
-  //   loading: 'Загрузка...',
-  //   success: 'Спасибо! Скоро мы с вами свяжемся!',
-  //   failure: 'Что-то пошло не так...',
-  // };
-  // let 
-  //     input = document.getElementsByTagName('input'),
-  //     form = document.querySelectorAll('.popup_calc_end form'),
-  //     statusMessage = document.createElement('div');
-  //     statusMessage.classList.add('status');
-      
-
-  // let sendForm = (data) => {
-  //   data.addEventListener('submit', (e) => {
-  //     e.preventDefault();
-  //     data.appendChild(statusMessage);
-
-  //     let formData = new FormData(data);
-
-  //     let postData = (data) => {
-
-  //       return new Promise((resolve, reject) => {
-  //         let request = new XMLHttpRequest();
-
-  //         request.open('POST', 'server.php');
-
-  //         request.setRequestHeader('Content-type', 'application/json; charset=utf-8');
-
-  //         request.onreadystatechange = () => {
-  //           if (request.readyState < 4) {
-  //             resolve();
-  //           } else if (request.readyState === 4) {
-  //             if (request.status == 200 && request.status < 3) {
-  //               resolve();
-  //             } else {
-  //               reject();
-  //             }
-  //           }
-  //         };
-  //         request.send(data);
-  //       });
-  //     }; // End postData
-      
-
-  //     let clearInput = () => {
-  //       for (let i = 0; i < input.length; i++) {
-  //         input[i].value = '';
-  //       }
-  //     };
-	// 		postData(formData)
-  //     .then(() => (statusMessage.innerHTML = message.loading))
-  //     .then(() => (statusMessage.innerHTML = message.success))
-  //     .catch(() => (statusMessage.innerHTML = message.failure))
-  //     .then(clearInput);
-  //   });
-    
-  // };    
-  // form.forEach( (e) => {
-	// 	sendForm(e);
-	// });
-
-}
-
-module.exports = calc;
-
-/***/ }),
-
 /***/ "./src/js/parts/form.js":
 /*!******************************!*\
   !*** ./src/js/parts/form.js ***!
@@ -534,6 +340,208 @@ module.exports = modal;
 
 /***/ }),
 
+/***/ "./src/js/parts/modalcalc.js":
+/*!***********************************!*\
+  !*** ./src/js/parts/modalcalc.js ***!
+  \***********************************/
+/*! exports provided: data_calc, default */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "data_calc", function() { return data_calc; });
+let data_calc = {};
+
+function modalCalc() {
+
+    let popupCalc = document.querySelector('.popup_calc '),
+        popupCalcProfile = document.querySelector('.popup_calc_profile'),
+        popupCalcEnd = document.querySelector('.popup_calc_end'),
+        body = document.querySelector("body"),
+        balconIcons = document.querySelector('.popup_calc_content'),
+        type = document.querySelectorAll('.type'),
+        type1 = document.querySelectorAll('.typeElem'),
+        type2 = document.querySelectorAll('.typeE'),
+        input = document.querySelectorAll('.form-control'),
+        width = document.getElementById('width'),
+        height = document.getElementById('height'),
+        material = document.getElementById("view_type"),
+        temp = document.getElementsByName('checkbox-test');
+
+    let showModalCalc = function () {
+        popupCalc.style.display = "block";
+        document.body.style.overflow = "hidden";
+    };
+    let showModalCalcProfile = function () {
+        popupCalcProfile.style.display = "block";
+        document.body.style.overflow = "hidden";
+    };
+    let showModalCalcEnd = function () {
+        popupCalcEnd.style.display = "block";
+        document.body.style.overflow = "hidden";
+    };
+
+    let hideModal = function () {
+        popupCalc.style.display = "none";
+        document.body.style.overflow = "";
+    };
+    let hideModalProfile = function () {
+        popupCalcProfile.style.display = "none";
+        document.body.style.overflow = "";
+    };
+    let hideModalEnd = function () {
+        popupCalcEnd.style.display = "none";
+        document.body.style.overflow = "";
+    };
+
+
+    let total = {};
+
+    let w = width,
+        h = height,
+        t;
+
+    function calcTotal() {
+
+        let typeWindow;
+
+        type2.forEach(e => {
+            if (e.classList.contains('do_image_more')) {
+                typeWindow = e.getAttribute('id');
+            }
+        });
+
+        temp.forEach((e, i) => {
+            if (temp[i].checked) {
+                t = temp[i].getAttribute('temp');
+            }
+        });
+
+        total.width = w.value;
+        total.heigh = h.value;
+        total.type2 = typeWindow;
+        total.material = material.value;
+        total.temp = t;
+
+        data_calc = total;
+    }
+
+    function clearInputs() {
+        [...input].forEach(elem => (elem.value = ""));
+    }
+
+    body.addEventListener("click", function forEach(elem) {
+        let target = elem.target;
+
+        if (target && target.classList.contains("popup_calc_btn")) {
+            showModalCalc(target);
+        }
+        if (target && target.classList.contains("popup_calc_button")) {
+            if ((w.value || h.value) && (w.value != 0 && h.value != 0)) {
+                calcTotal();
+                hideModal(target);
+                showModalCalcProfile(target);
+            }
+        }
+        if (target && target.classList.contains("popup_calc_profile_button")) {
+            if (temp[0].checked || temp[1].checked) {
+                calcTotal();
+                hideModalProfile(target);
+                showModalCalcEnd(target);
+            }
+
+        }
+
+        if (target && target.classList.contains("popup_calc_closes", 'popup_calc')) {
+            hideModal(target);
+
+        }
+        if (target && target.classList.contains("popup_calc_profile_closes")) {
+            total = {};
+            data_calc = {};
+            hideModalProfile(target);
+            clearInputs();
+            material.options[0].selected = true;
+        }
+        if (target && target.classList.contains("popup_calc_end_closes")) {
+            total = {};
+            data_calc = {};
+            hideModalEnd(target);
+            clearInputs();
+            material.options[0].selected = true;
+        }
+        if (target && target.classList.contains("popup_calc_end_close")) {
+            total = {};
+            data_calc = {};
+            hideModalEnd(target);
+            clearInputs();
+            material.options[0].selected = true;
+        }
+
+    });
+
+    let hideTabf = (f) => {
+        for (let i = f; i < type1.length; i++) {
+            type1[i].classList.remove('show');
+            type1[i].classList.add('hide');
+            type1[i].classList.add('text-center');
+
+        }
+    };
+
+    hideTabf(1);
+
+    let showTabg = (g) => {
+        if (type1[g].classList.contains('hide')) {
+            type1[g].classList.remove('hide');
+            type1[g].classList.add('show');
+            type1[g].classList.add('text-center');
+        }
+    };
+    let balconIconss = document.querySelectorAll('.typeE');
+    let hideTabc = (c) => {
+        for (let i = c; i < type.length; i++) {
+            balconIconss[i].classList.remove('.do_image_more');
+            balconIconss[i].classList.add('doimage_more');
+
+        }
+    };
+
+    hideTabc(1);
+
+    let showTabv = (v) => {
+        if (balconIconss[v].classList.contains('doimage_more')) {
+            balconIconss[v].classList.remove('doimage_more');
+            balconIconss[v].classList.add('do_image_more');
+
+        }
+    };
+
+    balconIcons.addEventListener('click', function (event) {
+        let target = event.target;
+        if (target && target.classList.contains('type') || target.classList.contains('typeE')) {
+            for (let i = 0; i < type.length, i < balconIconss.length; i++) {
+                if (target == type[i] || target == balconIconss[i]) {
+
+                    hideTabc(0);
+                    showTabv(i);
+                    hideTabf(0);
+                    showTabg(i);
+                    break;
+                }
+            }
+        }
+    });
+
+
+
+}
+
+/* harmony default export */ __webpack_exports__["default"] = (modalCalc);
+
+
+/***/ }),
+
 /***/ "./src/js/parts/tabs.js":
 /*!******************************!*\
   !*** ./src/js/parts/tabs.js ***!
@@ -708,8 +716,7 @@ module.exports = timer;
 __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _parts_modal__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./parts/modal */ "./src/js/parts/modal.js");
 /* harmony import */ var _parts_modal__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(_parts_modal__WEBPACK_IMPORTED_MODULE_0__);
-/* harmony import */ var _parts_calc__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./parts/calc */ "./src/js/parts/calc.js");
-/* harmony import */ var _parts_calc__WEBPACK_IMPORTED_MODULE_1___default = /*#__PURE__*/__webpack_require__.n(_parts_calc__WEBPACK_IMPORTED_MODULE_1__);
+/* harmony import */ var _parts_modalcalc__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./parts/modalcalc */ "./src/js/parts/modalcalc.js");
 /* harmony import */ var _parts_tabs__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./parts/tabs */ "./src/js/parts/tabs.js");
 /* harmony import */ var _parts_tabs__WEBPACK_IMPORTED_MODULE_2___default = /*#__PURE__*/__webpack_require__.n(_parts_tabs__WEBPACK_IMPORTED_MODULE_2__);
 /* harmony import */ var _parts_timer__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ./parts/timer */ "./src/js/parts/timer.js");
@@ -732,7 +739,7 @@ window.addEventListener('DOMContentLoaded', function () {
   'use strict';
   
   _parts_modal__WEBPACK_IMPORTED_MODULE_0___default()();
-  _parts_calc__WEBPACK_IMPORTED_MODULE_1___default()();
+  Object(_parts_modalcalc__WEBPACK_IMPORTED_MODULE_1__["default"])();
   _parts_tabs__WEBPACK_IMPORTED_MODULE_2___default()();
   _parts_timer__WEBPACK_IMPORTED_MODULE_3___default()();
   _parts_form__WEBPACK_IMPORTED_MODULE_4___default()();
