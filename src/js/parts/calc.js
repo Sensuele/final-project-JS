@@ -33,9 +33,9 @@ function calc() {
 			});
 			event.preventDefault();
 			document.body.style.overflow = "hidden";
-			const typeWindowCalc = event.target.parentNode.getAttribute('class');
+			let typeWindowCalc = event.target.parentNode.getAttribute('class');
 			bigImg.forEach(el => {
-				const typeSelectedWindow = el.getAttribute('id');
+				let typeSelectedWindow = el.getAttribute('id');
 				if (typeSelectedWindow == typeWindowCalc) {
 					el.style.display = 'inline-block';
 					data.type = typeWindowCalc;					
