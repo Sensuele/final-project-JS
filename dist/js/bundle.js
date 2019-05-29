@@ -452,7 +452,7 @@ function modalCalc() {
 
         }
 
-        if (target && target.classList.contains("popup_calc_closes", 'popup_calc')) {
+        if (target && target.classList.contains("popup_calc_close", 'popup_calc')) {
             hideModal(target);
 
         }
